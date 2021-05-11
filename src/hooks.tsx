@@ -125,11 +125,16 @@ export function useTabNameContext(): TabName {
  * You can use this to get the progessViewOffset and pass to the refresh control of scroll view.
  */
 export function useCollapsibleStyle(): CollapsibleStyle {
-  const { headerHeight, tabBarHeight, containerHeight } = useTabsContext()
-  const windowWidth = useWindowDimensions().width
+  const {
+    headerHeight,
+    tabBarHeight,
+    containerHeight,
+    tabBarWidth,
+  } = useTabsContext()
+  // const windowWidth = useWindowDimensions().width
 
   return {
-    style: { width: windowWidth },
+    style: { width: tabBarWidth },
     contentContainerStyle: {
       minHeight: IS_IOS
         ? (containerHeight || 0) - tabBarHeight

@@ -63,6 +63,7 @@ export type CollapsibleProps = {
   /**
    * Is optional, but will optimize the first render.
    */
+  tabBarWidth?: number
   tabBarHeight?: number
   /**
    * Header minimum height when collapsed
@@ -119,6 +120,7 @@ export type CollapsibleProps = {
 
 export type ContextType<T extends TabName = TabName> = {
   headerHeight: number
+  tabBarWidth: number
   tabBarHeight: number
   revealHeaderOnScroll: boolean
   snapThreshold: number | null | undefined

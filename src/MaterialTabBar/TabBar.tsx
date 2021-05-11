@@ -64,6 +64,7 @@ const MaterialTabBar = <T extends TabName = any>({
   const [itemsLayoutGathering, setItemsLayoutGathering] = React.useState(
     new Map<T, ItemLayout>()
   )
+  const [tabBarWidth, setTabBarWidth] = React.useState<number>(windowWidth)
   const tabsOffset = useSharedValue(0)
   const isScrolling = useSharedValue(false)
 
@@ -73,7 +74,7 @@ const MaterialTabBar = <T extends TabName = any>({
     scrollEnabled
       ? []
       : tabNames.map((_, i) => {
-          const tabWidth = windowWidth / nTabs
+          const tabWidth = tabBarWidth / nTabs
           return { width: tabWidth, x: i * tabWidth }
         })
   )
@@ -83,14 +84,14 @@ const MaterialTabBar = <T extends TabName = any>({
       isFirstRender.current = false
     } else if (!scrollEnabled) {
       // update items width on window resizing
-      const tabWidth = windowWidth / nTabs
+      const tabWidth = tabBarWidth / nTabs
       setItemsLayout(
         tabNames.map((_, i) => {
           return { width: tabWidth, x: i * tabWidth }
         })
       )
     }
-  }, [scrollEnabled, nTabs, tabNames, windowWidth])
+  }, [scrollEnabled, nTabs, tabNames, tabBarWidth])
 
   const onTabItemLayout = React.useCallback(
     (event: LayoutChangeEvent, name: T) => {
@@ -107,6 +108,14 @@ const MaterialTabBar = <T extends TabName = any>({
       }
     },
     [scrollEnabled]
+  )
+
+  const onLayout = React.useCallback(
+    (event: LayoutChangeEvent) => {
+      const width = event.nativeEvent.layout.width
+      if (tabBarWidth !== width) setTabBarWidth(width)
+    },
+    [tabBarWidth]
   )
 
   React.useEffect(() => {
@@ -171,9 +180,9 @@ const MaterialTabBar = <T extends TabName = any>({
         const offset = itemsLayout[index.value].x
         if (
           offset < tabsOffset.value ||
-          offset > tabsOffset.value + windowWidth - 2 * halfTab
+          offset > tabsOffset.value + tabBarWidth - 2 * halfTab
         ) {
-          scrollTo(tabBarRef, offset - windowWidth / 2 + halfTab, 0, true)
+          scrollTo(tabBarRef, offset - tabBarWidth / 2 + halfTab, 0, true)
         }
       }
     },
@@ -186,7 +195,7 @@ const MaterialTabBar = <T extends TabName = any>({
       style={style}
       contentContainerStyle={[
         styles.contentContainer,
-        !scrollEnabled && { width: windowWidth },
+        !scrollEnabled && { width: tabBarWidth },
         contentContainerStyle,
       ]}
       keyboardShouldPersistTaps="handled"
@@ -199,6 +208,7 @@ const MaterialTabBar = <T extends TabName = any>({
       scrollEnabled={scrollEnabled}
       onScroll={scrollEnabled ? onScroll : undefined}
       scrollEventThrottle={16}
+      onLayout={onLayout}
     >
       {tabNames.map((name, i) => {
         return (

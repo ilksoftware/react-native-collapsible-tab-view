@@ -84,6 +84,9 @@ export const Container = React.memo(
       const windowWidth = useWindowDimensions().width
       const firstRender = React.useRef(true)
 
+      const [containerWidth, setContainerWidth] = React.useState<number>(
+        windowWidth
+      )
       const [containerHeight, setContainerHeight] = React.useState<
         number | undefined
       >(undefined)
@@ -152,16 +155,16 @@ export const Container = React.memo(
 
       const getItemLayout = React.useCallback(
         (_: unknown, index: number) => ({
-          length: windowWidth,
-          offset: windowWidth * index,
+          length: containerWidth,
+          offset: containerWidth * index,
           index,
         }),
-        [windowWidth]
+        [containerWidth]
       )
 
       const indexDecimal: ContextType['indexDecimal'] = useDerivedValue(() => {
-        return scrollX.value / windowWidth
-      }, [windowWidth])
+        return scrollX.value / containerWidth
+      }, [containerWidth])
 
       // handle window resize
       React.useEffect(() => {
@@ -344,8 +347,11 @@ export const Container = React.memo(
         (event: LayoutChangeEvent) => {
           const height = event.nativeEvent.layout.height
           if (containerHeight !== height) setContainerHeight(height)
+
+          const width = event.nativeEvent.layout.width
+          if (containerWidth !== width) setContainerWidth(width)
         },
-        [containerHeight]
+        [containerHeight, containerWidth]
       )
 
       // fade in the pager if the headerHeight is not defined
@@ -433,6 +439,7 @@ export const Container = React.memo(
         <Context.Provider
           value={{
             contentInset,
+            tabBarWidth: containerWidth || 0,
             tabBarHeight: tabBarHeight || 0,
             headerHeight: headerHeight || 0,
             refMap,
