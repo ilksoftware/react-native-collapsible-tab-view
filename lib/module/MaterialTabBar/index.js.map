@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.tsx"],"names":["MaterialTabBar","TABBAR_HEIGHT","MaterialTabItem"],"mappings":"AAAA,SAASA,cAAT,EAAyBC,aAAzB,QAA8C,UAA9C;AACA,SAASC,eAAT,QAAgC,WAAhC","sourcesContent":["export { MaterialTabBar, TABBAR_HEIGHT } from './TabBar'\nexport { MaterialTabItem } from './TabItem'\nexport type { MaterialTabBarProps, MaterialTabItemProps } from './types'\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.tsx"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;AACA","sourcesContent":["export { MaterialTabBar, TABBAR_HEIGHT } from './TabBar'\nexport { MaterialTabItem } from './TabItem'\nexport type { MaterialTabBarProps, MaterialTabItemProps } from './types'\n"]}
