@@ -1,5 +1,6 @@
 import React from 'react'
-import { FlatList as RNFlatList, FlatListProps } from 'react-native'
+import { FlatListProps } from 'react-native'
+import { FlatList as RNFlatList } from 'react-native-gesture-handler'
 
 import { AnimatedFlatList, IS_IOS } from './helpers'
 import {
@@ -21,11 +22,11 @@ function FlatListImpl<R>(
     refreshControl,
     ...rest
   }: Omit<FlatListProps<R>, 'onScroll'>,
-  passRef: React.Ref<RNFlatList>
+  passRef: React.Ref<any>
 ): React.ReactElement {
   const name = useTabNameContext()
   const { setRef, contentInset, scrollYCurrent } = useTabsContext()
-  const ref = useSharedAnimatedRef<RNFlatList<unknown>>(passRef)
+  const ref = useSharedAnimatedRef<any>(passRef)
   const [canBindScrollEvent, setCanBindScrollEvent] = React.useState(false)
 
   useAfterMountEffect(() => {
