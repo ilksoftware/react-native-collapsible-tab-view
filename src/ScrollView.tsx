@@ -34,7 +34,7 @@ export const ScrollView = React.forwardRef<
     passRef
   ) => {
     const name = useTabNameContext()
-    const ref = useSharedAnimatedRef<RNScrollView>(passRef)
+    const ref = useSharedAnimatedRef<any>(passRef)
     const { setRef, contentInset, scrollYCurrent } = useTabsContext()
     const {
       style: _style,
@@ -69,7 +69,6 @@ export const ScrollView = React.forwardRef<
     return (
       <Animated.ScrollView
         {...rest}
-        // @ts-expect-error reanimated types are broken on ref
         ref={ref}
         bouncesZoom={false}
         style={[_style, style]}

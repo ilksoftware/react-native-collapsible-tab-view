@@ -7,7 +7,7 @@ import {
   MutableRefObject,
   useEffect,
 } from 'react'
-import { useWindowDimensions } from 'react-native'
+// import { useWindowDimensions } from 'react-native'
 import { ContainerRef, RefComponent } from 'react-native-collapsible-tab-view'
 import Animated, {
   cancelAnimation,
