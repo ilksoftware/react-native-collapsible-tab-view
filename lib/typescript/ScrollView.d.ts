@@ -1,5 +1,6 @@
 import React from 'react';
-import { ScrollViewProps, ScrollView as RNScrollView } from 'react-native';
+import { ScrollViewProps } from 'react-native';
+import { ScrollView as RNScrollView } from 'react-native-gesture-handler';
 /**
  * Use like a regular ScrollView.
  */

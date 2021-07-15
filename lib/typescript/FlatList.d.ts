@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList as RNFlatList, FlatListProps } from 'react-native';
+import { FlatListProps } from 'react-native';
+import { FlatList as RNFlatList } from 'react-native-gesture-handler';
 /**
  * Use like a regular FlatList.
  */
